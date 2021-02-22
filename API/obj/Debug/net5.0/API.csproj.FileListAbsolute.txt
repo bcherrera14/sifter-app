@@ -35,3 +35,4 @@ C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\
 C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Debug\net5.0\ref\API.dll
 C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Debug\net5.0\API.pdb
 C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Debug\net5.0\API.genruntimeconfig.cache
+C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\bin\Debug\net5.0\package-lock.json

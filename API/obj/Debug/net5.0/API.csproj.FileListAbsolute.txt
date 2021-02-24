@@ -36,3 +36,6 @@ C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\
 C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Debug\net5.0\API.pdb
 C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Debug\net5.0\API.genruntimeconfig.cache
 C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\bin\Debug\net5.0\package-lock.json
+C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\bin\Debug\net5.0\System.Net.Http.Formatting.dll
+C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll

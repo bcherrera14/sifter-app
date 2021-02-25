@@ -45,14 +45,14 @@ namespace API.Controllers
             return JsonConvert.DeserializeObject<BearerToken>(result);
         }
 
-        // public async Task<CharacterResponse> Tweet()
+        // public async Task<TwitterResponse> Tweet()
         // {
         //     // var client = new HttpClient();
-        //     HttpResponseMessage response = await client.GetAsync("https://swapi.py4e.com/api/people");
+        //     HttpResponseMessage response = await client.GetAsync("https://api.twitter.com/1.1/search/tweets.json?q=nasa&result_type=popular");
 
-        //     string characterString = await response.Content.ReadAsStringAsync();
+        //     string tweetString = await response.Content.ReadAsStringAsync();
 
-        //     return JsonConvert.DeserializeObject<CharacterResponse>(characterString); 
+        //     return JsonConvert.DeserializeObject<TwitterResponse>(tweetString); 
 
         // }
 

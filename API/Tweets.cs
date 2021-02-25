@@ -2,6 +2,8 @@ namespace API
 {
     public class Tweets
     {
-        public int MyProperty { get; set; }
+        public string created_at { get; set; }
+        public string text { get; set; }
+        public int retweet_count { get; set; }
     }
 }

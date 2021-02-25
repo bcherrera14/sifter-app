@@ -23,14 +23,8 @@ namespace API.Controllers
 
             return JsonConvert.DeserializeObject<CharacterResponse>(characterString); 
 
-            // Console.WriteLine(characterResponse);
         }
         
-        // public IEnumerable<string> Get()
-        // {
-        //    return new string[] {"tweet1", "tweet2"};
-           
-        // }
     }
         
         

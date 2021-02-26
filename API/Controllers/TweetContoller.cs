@@ -39,16 +39,27 @@ namespace API.Controllers
 
         
         [HttpGet("tweets/data")]
-        public async Task<TwitterResponse> Tweet(string token, string type)
+        public async Task<TwitterResponse> Tweet(string type, string token)
         {
+            var newToken =  Uri.EscapeDataString(token);
             Console.WriteLine(type);
             Console.WriteLine(token);
+            Console.WriteLine(newToken);
+
+            
+
+
             var ACCESS_TOKEN = "AAAAAAAAAAAAAAAAAAAAAGweNAEAAAAADtBzp%2BcRoO54u%2FZZ11bxSnZUfvE%3DrzxvHeZcoMMzPofaXKHQMueIH1S7AbPL3uTptflav1qqMV8V0X";
             var TOKEN_TYPE = "Bearer";
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(TOKEN_TYPE, ACCESS_TOKEN);
-            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(type, token);
+            // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(TOKEN_TYPE, ACCESS_TOKEN);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(type, newToken);
+            Console.WriteLine(client.DefaultRequestHeaders);
+
             HttpResponseMessage response = await client.GetAsync("https://api.twitter.com/1.1/search/tweets.json?q=@nasa&result_type=popular");
+            Console.WriteLine(response);
+
             string tweetString = await response.Content.ReadAsStringAsync();
+            //Console.WriteLine(tweetString);
             return JsonConvert.DeserializeObject<TwitterResponse>(tweetString); 
 
         }

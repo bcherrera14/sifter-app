@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -11,20 +12,35 @@ using Newtonsoft.Json;
 
 namespace API.Controllers
 {
+    
     [ApiController]
     [Route("tweets")]
     public class TweetContoller
     {
+        
         static readonly HttpClient client = new HttpClient();
-        public async Task<TwitterResponse> Tweet()
+
+        
+
+        public async Task<TwitterResponse> Tweet(string token, string type)
         {
-            // var client = new HttpClient();
+            Console.WriteLine(type);
+            Console.WriteLine(token);
+
+
             var ACCESS_TOKEN = "AAAAAAAAAAAAAAAAAAAAAGweNAEAAAAADtBzp%2BcRoO54u%2FZZ11bxSnZUfvE%3DrzxvHeZcoMMzPofaXKHQMueIH1S7AbPL3uTptflav1qqMV8V0X";
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ACCESS_TOKEN);
+            var TOKEN_TYPE = "Bearer";
+            
+            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(TOKEN_TYPE, ACCESS_TOKEN);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(type, token);
+
+
+
             HttpResponseMessage response = await client.GetAsync("https://api.twitter.com/1.1/search/tweets.json?q=nasa&result_type=popular");
 
             string tweetString = await response.Content.ReadAsStringAsync();
-            // Console.WriteLine(tweetString);
+
+
             return JsonConvert.DeserializeObject<TwitterResponse>(tweetString); 
 
         }

@@ -16,18 +16,6 @@ namespace API.Controllers
     public class TokenController
     {
         static readonly HttpClient client = new HttpClient();
-        
-        // public async Task<CharacterResponse> Tweet()
-        // {
-        //     // var client = new HttpClient();
-        //     HttpResponseMessage response = await client.GetAsync("https://swapi.py4e.com/api/people");
-
-        //     string characterString = await response.Content.ReadAsStringAsync();
-
-        //     return JsonConvert.DeserializeObject<CharacterResponse>(characterString); 
-
-        // }
-
         public async Task<BearerToken> Token()
         {
             var userName = "bgQLtlkwTCJRAJUcsXmCNmSTA";
@@ -45,6 +33,8 @@ namespace API.Controllers
             return JsonConvert.DeserializeObject<BearerToken>(result);
         }
 
+        
+
         // public async Task<TwitterResponse> Tweet()
         // {
         //     // var client = new HttpClient();
@@ -57,4 +47,5 @@ namespace API.Controllers
         // }
 
     }
+
 }

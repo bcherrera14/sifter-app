@@ -19,7 +19,7 @@ namespace API.Controllers
     {
         
         static readonly HttpClient client = new HttpClient();
-        [HttpPost("tweets/token")]
+        [HttpPost("api/tweets/token")]
        public async Task<BearerToken> Token()
         {
             var userName = "bgQLtlkwTCJRAJUcsXmCNmSTA";
@@ -38,33 +38,30 @@ namespace API.Controllers
         }
 
         
-        [HttpGet("tweets/data")]
-        public async Task<TwitterResponse> Tweet(string type, string token)
+        [HttpGet("api/tweets/search")]
+        public async Task<TwitterResponse> Tweet(string type, string token, string searchTerm)
         {
             var newToken =  Uri.EscapeDataString(token);
-            Console.WriteLine(type);
-            Console.WriteLine(token);
-            Console.WriteLine(newToken);
+            // Console.WriteLine(type);
+            // Console.WriteLine(token);
+            // Console.WriteLine(newToken);
 
-            
-
-
-            var ACCESS_TOKEN = "AAAAAAAAAAAAAAAAAAAAAGweNAEAAAAADtBzp%2BcRoO54u%2FZZ11bxSnZUfvE%3DrzxvHeZcoMMzPofaXKHQMueIH1S7AbPL3uTptflav1qqMV8V0X";
-            var TOKEN_TYPE = "Bearer";
+            // var ACCESS_TOKEN = "AAAAAAAAAAAAAAAAAAAAAGweNAEAAAAADtBzp%2BcRoO54u%2FZZ11bxSnZUfvE%3DrzxvHeZcoMMzPofaXKHQMueIH1S7AbPL3uTptflav1qqMV8V0X";
+            // var TOKEN_TYPE = "Bearer";
             // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(TOKEN_TYPE, ACCESS_TOKEN);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(type, newToken);
-            Console.WriteLine(client.DefaultRequestHeaders);
+            //Console.WriteLine(client.DefaultRequestHeaders);
 
-            HttpResponseMessage response = await client.GetAsync("https://api.twitter.com/1.1/search/tweets.json?q=@nasa&result_type=popular");
+            HttpResponseMessage response = await client.GetAsync($"https://api.twitter.com/1.1/search/tweets.json?q={searchTerm}&result_type=popular");
             Console.WriteLine(response);
 
             string tweetString = await response.Content.ReadAsStringAsync();
-            //Console.WriteLine(tweetString);
+            Console.WriteLine(tweetString);
             return JsonConvert.DeserializeObject<TwitterResponse>(tweetString); 
 
         }
 
-        [HttpGet("tweets/username")]
+        [HttpGet("api/tweets/users")]
         public async Task<UserResponse> Username()
         {
             var ACCESS_TOKEN = "AAAAAAAAAAAAAAAAAAAAAGweNAEAAAAADtBzp%2BcRoO54u%2FZZ11bxSnZUfvE%3DrzxvHeZcoMMzPofaXKHQMueIH1S7AbPL3uTptflav1qqMV8V0X";

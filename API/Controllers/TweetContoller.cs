@@ -19,7 +19,7 @@ namespace API.Controllers
     {
         
         static readonly HttpClient client = new HttpClient();
-        [HttpPost("api/tweets/token")]
+        [HttpGet("api/tweets/token")]
        public async Task<BearerToken> Token()
         {
             var userName = "bgQLtlkwTCJRAJUcsXmCNmSTA";
@@ -33,7 +33,7 @@ namespace API.Controllers
             HttpResponseMessage response = await client.PostAsync(url, content);
 
             string result = await response.Content.ReadAsStringAsync();
-            Console.WriteLine(result);
+            // Console.WriteLine(result);
             return JsonConvert.DeserializeObject<BearerToken>(result);
         }
 

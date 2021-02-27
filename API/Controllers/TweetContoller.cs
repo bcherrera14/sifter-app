@@ -39,7 +39,7 @@ namespace API.Controllers
 
         
         [HttpGet("api/tweets/search")]
-        public async Task<TwitterResponse> Tweet(string type, string token, string searchTerm)
+        public async Task<TwitterResponse> Tweet(string type, string token, string searchTerm, string searchUser)
         {
             var newToken =  Uri.EscapeDataString(token);
             // Console.WriteLine(type);
@@ -52,7 +52,7 @@ namespace API.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(type, newToken);
             //Console.WriteLine(client.DefaultRequestHeaders);
 
-            HttpResponseMessage response = await client.GetAsync($"https://api.twitter.com/1.1/search/tweets.json?q={searchTerm}&result_type=popular");
+            HttpResponseMessage response = await client.GetAsync($"https://api.twitter.com/1.1/search/tweets.json?q={searchTerm}{searchUser}&result_type=recent");
             Console.WriteLine(response);
 
             string tweetString = await response.Content.ReadAsStringAsync();

@@ -52,7 +52,7 @@ namespace API.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(type, newToken);
             //Console.WriteLine(client.DefaultRequestHeaders);
 
-            HttpResponseMessage response = await client.GetAsync($"https://api.twitter.com/1.1/search/tweets.json?q={searchTerm}{searchUser}&result_type=recent");
+            HttpResponseMessage response = await client.GetAsync($"https://api.twitter.com/1.1/search/tweets.json?q={searchTerm}{searchUser}&result_type=popular&lang=en");
             Console.WriteLine(response);
 
             string tweetString = await response.Content.ReadAsStringAsync();

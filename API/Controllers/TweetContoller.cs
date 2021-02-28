@@ -39,20 +39,22 @@ namespace API.Controllers
 
         
         [HttpGet("api/tweets/search")]
-        public async Task<TwitterResponse> Tweet(string type, string token, string searchTerm, string searchUser)
+        public async Task<TwitterResponse> Tweet(string type, string token, string searchTerm, string searchUser, string result_type)
         {
             var newToken =  Uri.EscapeDataString(token);
             // Console.WriteLine(type);
             // Console.WriteLine(token);
             // Console.WriteLine(newToken);
 
-            // var ACCESS_TOKEN = "AAAAAAAAAAAAAAAAAAAAAGweNAEAAAAADtBzp%2BcRoO54u%2FZZ11bxSnZUfvE%3DrzxvHeZcoMMzPofaXKHQMueIH1S7AbPL3uTptflav1qqMV8V0X";
-            // var TOKEN_TYPE = "Bearer";
+            var ACCESS_TOKEN = "AAAAAAAAAAAAAAAAAAAAAGweNAEAAAAADtBzp%2BcRoO54u%2FZZ11bxSnZUfvE%3DrzxvHeZcoMMzPofaXKHQMueIH1S7AbPL3uTptflav1qqMV8V0X";
+            var TOKEN_TYPE = "Bearer";
             // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(TOKEN_TYPE, ACCESS_TOKEN);
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(type, newToken);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(type, token);
+            // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(TOKEN_TYPE, ACCESS_TOKEN);
+
             //Console.WriteLine(client.DefaultRequestHeaders);
 
-            HttpResponseMessage response = await client.GetAsync($"https://api.twitter.com/1.1/search/tweets.json?q={searchTerm}{searchUser}&result_type=popular&lang=en");
+            HttpResponseMessage response = await client.GetAsync($"https://api.twitter.com/1.1/search/tweets.json?q={searchTerm}{searchUser}&result_type={result_type}&lang=en");
             Console.WriteLine(response);
 
             string tweetString = await response.Content.ReadAsStringAsync();

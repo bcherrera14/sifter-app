@@ -7,28 +7,22 @@ const TweetCard = ({ tweet }) => {
 			<Card.Body>
 				<div className="d-flex align-items-center">
 					<div className="mr-2">
-						<img
-							src="https://avatars.githubusercontent.com/u/11397332?s=460&u=3f3c56d4899795a3665aadfc798f0a5eaba4bfd5&v=4"
-							className="rounded-circle card-img"
-							alt="profile"
-						/>
+						<img src={tweet.user.profile_image_url} className="rounded-circle card-img" alt="profile" />
 					</div>
 					<div>
-						<Card.Title>
-							{tweet.firstName} {tweet.lastName}
-						</Card.Title>
-						<Card.Subtitle className="mb-2 text-muted">{tweet.username}</Card.Subtitle>
+						<Card.Title>{tweet.user.name}</Card.Title>
+						<Card.Subtitle className="mb-2 text-muted">@{tweet.user.screen_name}</Card.Subtitle>
 					</div>
 					<div className="ml-auto mb-4">
-						<Card.Subtitle className="text-muted">{tweet.date}</Card.Subtitle>
+						<Card.Subtitle className="text-muted">{tweet.created_at}</Card.Subtitle>
 					</div>
 				</div>
-				<Card.Text className="pt-3">{tweet.textContent}</Card.Text>
+				<Card.Text className="pt-3">{tweet.text}</Card.Text>
 
 				<i className="far fa-heart p-1" />
-				<span>{tweet.likes}</span>
+				<span>{tweet.favorite_count}</span>
 				<i className="fas fa-retweet p-1" />
-				<span>{tweet.retweets}</span>
+				<span>{tweet.retweet_count}</span>
 			</Card.Body>
 		</Card>
 	);

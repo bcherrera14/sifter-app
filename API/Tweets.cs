@@ -8,6 +8,7 @@ namespace API
         public string text { get; set; }
         public int retweet_count { get; set; }
         public int favorite_count { get; set; }
+        public string id_str { get; set; }
         public UserData User { get; set; }
     }
 }

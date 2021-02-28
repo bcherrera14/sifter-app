@@ -1,10 +1,9 @@
 import React from 'react';
 import TweetCard from './TweetCard';
 
-const TweetFeed = ({ tweetData }) => {
-	console.log(tweetData);
-	const tweetCards = tweetData.map((tweet) => {
-		return <TweetCard key={tweet.id} tweet={tweet} />;
+const TweetFeed = ({ statuses }) => {
+	const tweetCards = statuses.map((tweet) => {
+		return <TweetCard key={tweet.id_str} tweet={tweet} />;
 	});
 	return <div className="card-grid d-flex flex-column">{tweetCards}</div>;
 };

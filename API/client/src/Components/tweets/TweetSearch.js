@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Form, Col, Jumbotron, Container, Button } from 'react-bootstrap';
 
 import TweetCard from './TweetCard';
@@ -8,36 +9,98 @@ import TweetFeed from './TweetFeed';
 class TweetSearch extends React.Component {
 	constructor() {
 		super();
-		this.state = { tweetData: [] };
+		this.state = {
+			tweetData: [],
+			statuses: [],
+			searchUser: '',
+			searchTerm: '',
+			result_type: '',
+			token_type: '',
+			access_token: ''
+		};
 		this.onFormSubmit = this.onFormSubmit.bind(this);
+		this.getAuthToken = this.getAuthToken.bind(this);
+	}
+
+	getAuthToken() {
+		axios
+			.get('http://localhost:5000/api/tweets/token')
+			.then((response) => {
+				console.log(response);
+				console.log(response.data);
+				this.setState({
+					token_type: response.data.token_type,
+					access_token: response.data.access_token
+				});
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	}
 
 	componentDidMount() {
-		this.setState({ tweetData });
+		this.getAuthToken();
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (prevState.searchTerm !== this.state.searchTerm || prevState.searchUser !== this.state.searchUser) {
+			console.log('Search: ' + this.state.searchTerm);
+			let config = {
+				params: {
+					searchTerm: this.state.searchTerm,
+					searchUser: this.state.searchUser,
+					result_type: this.state.result_type,
+					type: this.state.token_type,
+					token: this.state.access_token
+				}
+			};
+			axios
+				.get('http://localhost:5000/api/tweets/search', config)
+				.then((response) => {
+					console.log(response);
+					// console.log(response.data);
+					this.setState({
+						statuses: response.data.statuses
+					});
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		}
 	}
 
 	onFormSubmit(e) {
 		e.preventDefault();
-		const searchTerm = e.target.searchTerm.value;
+		const searchValue = e.target.searchTerm.value;
 		const searchCategory = e.target.inlineFormCustomSelect.value;
 		let response = [];
 		if (searchCategory === 'username') {
-			response = tweetData.filter((tweet) => tweet.firstName.toLowerCase() === searchTerm.toLowerCase());
+			// response = tweetData.filter((tweet) => tweet.firstName.toLowerCase() === searchTerm.toLowerCase());
+			this.setState({
+				searchterm: '',
+				searchUser: 'from%3A' + searchValue,
+				result_type: 'recent'
+			});
 		} else if (searchCategory === 'keyword') {
-			tweetData.forEach((tweet) => {
-				if (tweet.textContent.toLowerCase().includes(searchTerm.toLowerCase())) {
-					response.push(tweet);
-				}
+			// tweetData.forEach((tweet) => {
+			// 	if (tweet.textContent.toLowerCase().includes(searchTerm.toLowerCase())) {
+			// 		response.push(tweet);
+			// 	}
+			// });
+			this.setState({
+				searchTerm: searchValue,
+				searchUser: '',
+				result_type: 'popular'
 			});
 		}
-		this.setState({
-			tweetData: response
-		});
+		// this.setState({
+		// 	tweetData: response
+		// });
 		console.log(e.target.inlineFormCustomSelect.value);
 	}
 
 	render() {
-		console.log(this.state.tweetData);
+		console.log(this.state.statuses);
 		return (
 			<div>
 				<Jumbotron fluid className="d-flex justify-content-center">
@@ -83,7 +146,7 @@ class TweetSearch extends React.Component {
 						</Form>
 					</div>
 
-					<TweetFeed tweetData={this.state.tweetData} />
+					<TweetFeed tweetData={this.state.tweetData} statuses={this.state.statuses} />
 				</div>
 			</div>
 		);

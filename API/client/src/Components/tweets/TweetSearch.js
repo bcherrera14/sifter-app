@@ -12,7 +12,6 @@ class TweetSearch extends React.Component {
 		this.state = {
 			tweetData: [],
 			statuses: [],
-			searchUser: '',
 			searchTerm: '',
 			result_type: '',
 			token_type: '',
@@ -36,6 +35,17 @@ class TweetSearch extends React.Component {
 			.catch((error) => {
 				console.log(error);
 			});
+	}
+
+	changeSearchIcon(e) {
+		const searchCategory = e.target.value;
+		if (searchCategory === 'keyword') {
+			document.querySelector('#at-icon').style.display = 'none';
+			document.querySelector('#search-icon').style.display = 'block';
+		} else if (searchCategory === 'username') {
+			document.querySelector('#search-icon').style.display = 'none';
+			document.querySelector('#at-icon').style.display = 'block';
+		}
 	}
 
 	componentDidMount() {
@@ -77,8 +87,7 @@ class TweetSearch extends React.Component {
 		if (searchCategory === 'username') {
 			// response = tweetData.filter((tweet) => tweet.firstName.toLowerCase() === searchTerm.toLowerCase());
 			this.setState({
-				searchterm: '',
-				searchUser: 'from%3A' + searchValue,
+				searchTerm: 'from%3A' + searchValue,
 				result_type: 'recent'
 			});
 		} else if (searchCategory === 'keyword') {
@@ -89,7 +98,6 @@ class TweetSearch extends React.Component {
 			// });
 			this.setState({
 				searchTerm: searchValue,
-				searchUser: '',
 				result_type: 'popular'
 			});
 		}
@@ -118,9 +126,15 @@ class TweetSearch extends React.Component {
 									<Form.Label className="mr-sm-2" htmlFor="inlineFormCustomSelect" srOnly>
 										Preference
 									</Form.Label>
-									<Form.Control as="select" className="mr-sm-2" id="inlineFormCustomSelect" custom>
-										<option value="username">Username</option>
+									<Form.Control
+										as="select"
+										className="mr-sm-2"
+										id="inlineFormCustomSelect"
+										custom
+										onChange={(e) => this.changeSearchIcon(e)}
+									>
 										<option value="keyword">Keyword</option>
+										<option value="username">Username</option>
 									</Form.Control>
 								</Col>
 								<Col className="my-1">
@@ -134,8 +148,11 @@ class TweetSearch extends React.Component {
 											autoComplete="off"
 											placeholder="Search for tweets"
 										/>
-										<span>
+										<span id="search-icon">
 											<i className="fas fa-search" />
+										</span>
+										<span id="at-icon">
+											<i className="fas fa-at" />
 										</span>
 									</div>
 								</Col>

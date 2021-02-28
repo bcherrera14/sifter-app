@@ -54,7 +54,7 @@ namespace API.Controllers
 
             //Console.WriteLine(client.DefaultRequestHeaders);
 
-            HttpResponseMessage response = await client.GetAsync($"https://api.twitter.com/1.1/search/tweets.json?q={searchTerm}{searchUser}&result_type={result_type}&lang=en");
+            HttpResponseMessage response = await client.GetAsync($"https://api.twitter.com/1.1/search/tweets.json?q={searchTerm}{searchUser}&result_type={result_type}&lang=en&tweet_mode=extended");
             Console.WriteLine(response);
 
             string tweetString = await response.Content.ReadAsStringAsync();

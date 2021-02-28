@@ -17,7 +17,7 @@ const TweetCard = ({ tweet }) => {
 						<Card.Subtitle className="text-muted">{tweet.created_at}</Card.Subtitle>
 					</div>
 				</div>
-				<Card.Text className="pt-3">{tweet.text}</Card.Text>
+				<Card.Text className="pt-3">{tweet.full_text}</Card.Text>
 
 				<i className="far fa-heart p-1" />
 				<span>{tweet.favorite_count}</span>

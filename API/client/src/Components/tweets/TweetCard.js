@@ -2,6 +2,8 @@ import React from 'react';
 import { Form, Col, Card, Button } from 'react-bootstrap';
 
 const TweetCard = ({ tweet }) => {
+	const dateArray = tweet.created_at.split(' ');
+	const date = dateArray[0] + ' ' + dateArray[1] + ' ' + dateArray[2];
 	return (
 		<Card style={{ width: '50rem' }}>
 			<Card.Body>
@@ -14,7 +16,7 @@ const TweetCard = ({ tweet }) => {
 						<Card.Subtitle className="mb-2 text-muted">@{tweet.user.screen_name}</Card.Subtitle>
 					</div>
 					<div className="ml-auto mb-4">
-						<Card.Subtitle className="text-muted">{tweet.created_at}</Card.Subtitle>
+						<Card.Subtitle className="text-muted">{date}</Card.Subtitle>
 					</div>
 				</div>
 				<Card.Text className="pt-3">{tweet.full_text}</Card.Text>

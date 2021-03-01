@@ -39,8 +39,7 @@ class TweetProfile extends React.Component {
 		if (prevState.username !== this.state.username) {
 			let config = {
 				params: {
-					searchTerm: 'from%3A' + this.props.username,
-					result_type: 'recent',
+					screenName: this.props.username,
 					type: this.state.token_type,
 					token: this.state.access_token
 				}
@@ -49,8 +48,8 @@ class TweetProfile extends React.Component {
 				// .get('http://localhost:5000/api/tweets/search', config)
 				.get('http://localhost:5000/api/tweets/users', config)
 				.then((response) => {
-					console.log(response.data.statuses[0]);
-					const userData = response.data.statuses[0].user;
+					console.log(response.data);
+					const userData = response.data;
 					this.setState({
 						name: userData.name,
 						screenName: userData.screen_name,

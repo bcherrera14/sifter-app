@@ -53,12 +53,12 @@ namespace API.Controllers
         }
 
         [HttpGet("api/tweets/users")]
-        public async Task<UserResponse> Username(string type, string token, string searchTerm, string result_type)
+        public async Task<UserResponse> Username(string type, string token, string screenName)
         {
             // var ACCESS_TOKEN = "AAAAAAAAAAAAAAAAAAAAAGweNAEAAAAADtBzp%2BcRoO54u%2FZZ11bxSnZUfvE%3DrzxvHeZcoMMzPofaXKHQMueIH1S7AbPL3uTptflav1qqMV8V0X";
             // var TOKEN_TYPE = "Bearer";
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(type, token);
-            HttpResponseMessage response = await client.GetAsync($"https://api.twitter.com/1.1/search/tweets.json?q={searchTerm}&result_type={result_type}&lang=en&tweet_mode=extended");
+            HttpResponseMessage response = await client.GetAsync($"https://api.twitter.com/1.1/users/show.json?screen_name={screenName}");
             // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(TOKEN_TYPE, ACCESS_TOKEN);
             //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(type, token);
             // HttpResponseMessage response = await client.GetAsync("https://api.twitter.com/2/users/by?usernames=tesla");

@@ -16,6 +16,7 @@ class TweetProfile extends React.Component {
 		this.getUserData = this.getUserData.bind(this);
 		this.getAuthToken = this.getAuthToken.bind(this);
 		this.getRandomStatus = this.getRandomStatus.bind(this);
+		this.handleClick = this.handleClick.bind(this);
 	}
 
 	getAuthToken() {
@@ -66,7 +67,7 @@ class TweetProfile extends React.Component {
 	getRandomStatus() {
 		let config = {
 			params: {
-				searchTerm: 'from%3A' + this.state.screenName,
+				searchTerm: 'from%3A' + this.props.username,
 				result_type: '',
 				type: this.state.token_type,
 				token: this.state.access_token
@@ -85,13 +86,17 @@ class TweetProfile extends React.Component {
 			.catch((error) => {
 				console.log(error);
 			});
+	}
 
-		this.props.modalShow(this.state.randomTweet);
+	handleClick() {
+		this.props.modalShow();
+		this.props.getTweet(this.state.randomTweet);
 	}
 
 	componentDidUpdate(prevProps, prevState) {
 		if (prevState.username !== this.state.username) {
 			this.getUserData();
+			this.getRandomStatus();
 		}
 	}
 
@@ -108,7 +113,7 @@ class TweetProfile extends React.Component {
 						className="rounded-circle profile-img align-self-center p-3"
 						alt="profile"
 					/>
-					<Button variant="primary" className="ml-auto mr-auto mt-2" onClick={this.props.modalShow}>
+					<Button variant="primary" className="ml-auto mr-auto mt-2" onClick={() => this.handleClick()}>
 						View Tweet
 					</Button>
 				</Card.Body>

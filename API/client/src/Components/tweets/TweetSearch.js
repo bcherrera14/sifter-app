@@ -23,7 +23,9 @@ class TweetSearch extends React.Component {
 			.then((response) => {
 				this.setState({
 					token_type: response.data.token_type,
-					access_token: response.data.access_token
+					access_token: response.data.access_token,
+					searchTerm: 'from%3Amental_floss+OR+from%3Anpr+OR+from%3Averge+OR+from%3Atechreview',
+					result_type: 'recent'
 				});
 			})
 			.catch((error) => {

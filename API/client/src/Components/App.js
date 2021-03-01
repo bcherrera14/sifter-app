@@ -12,41 +12,42 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			username: 'bgQLtlkwTCJRAJUcsXmCNmSTA',
-			password: '2LpT3c5LWx7isQrlGYkytbzLdauupz0MdVdYkKNRAwpanzlPcS',
 			token_type: '',
 			access_token: '',
-			authToken: {}
+			twitterAuth: ''
 		};
 	}
 
+	getAuthToken() {
+		axios
+			.get('http://localhost:5000/api/tweets/token')
+			.then((response) => {
+				console.log(response.data);
+				this.setState({
+					token_type: response.data.token_type,
+					access_token: response.data.access_token,
+					twitterAuth: response.data
+				});
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}
+
 	componentDidMount() {
-		// axios
-		// 	.get('http://localhost:5000/api/tweets/token')
-		// 	.then((response) => {
-		// 		console.log(response);
-		// 		console.log(response.data);
-		// 		this.setState({
-		// 			token_type: response.data.token_type,
-		// 			access_token: response.data.access_token,
-		// 			authToken: response.data
-		// 		});
-		// 	})
-		// 	.catch((error) => {
-		// 		console.log(error);
-		// 	});
+		this.getAuthToken();
 	}
 
 	render() {
-		console.log(this.state.authToken);
+		//console.log(this.state.twitterAuth);
 		return (
 			<div>
 				<BrowserRouter>
 					<div>
 						<Header />
 						<Route path="/" exact component={TweetLanding} />
-						<Route path="/tweet/search" exact component={TweetSearch} authToken={this.state.authToken} />
-						<Route path="/tweet/favorites" exact component={TweetFavorites} />
+						<Route path="/tweet/search" exact component={TweetSearch} />
+						<Route path="/tweet/favorites" exact component={TweetFavorites} auth={this.state.twitterAuth} />
 					</div>
 				</BrowserRouter>
 			</div>

@@ -13,6 +13,9 @@ class TweetProfile extends React.Component {
 			token_type: '',
 			access_token: ''
 		};
+		this.getUserData = this.getUserData.bind(this);
+		this.getAuthToken = this.getAuthToken.bind(this);
+		this.getRandomStatus = this.getRandomStatus.bind(this);
 	}
 
 	getAuthToken() {
@@ -35,30 +38,60 @@ class TweetProfile extends React.Component {
 		// console.log(this.props);
 	}
 
+	getUserData() {
+		let config = {
+			params: {
+				screenName: this.props.username,
+				type: this.state.token_type,
+				token: this.state.access_token
+			}
+		};
+		axios
+			// .get('http://localhost:5000/api/tweets/search', config)
+			.get('http://localhost:5000/api/tweets/users', config)
+			.then((response) => {
+				console.log(response.data);
+				const userData = response.data;
+				this.setState({
+					name: userData.name,
+					screenName: userData.screen_name,
+					profileImage: userData.profile_image_url.replace('normal', '400x400')
+				});
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}
+
+	getRandomStatus() {
+		let config = {
+			params: {
+				searchTerm: 'from%3A' + this.state.screenName,
+				result_type: '',
+				type: this.state.token_type,
+				token: this.state.access_token
+			}
+		};
+		axios
+			.get('http://localhost:5000/api/tweets/search', config)
+			.then((response) => {
+				const numStatuses = response.data.statuses.length;
+				const index = Math.floor(Math.random() * numStatuses);
+				console.log(response.data.statuses[index]);
+				this.setState({
+					randomTweet: response.data.statuses[index]
+				});
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+
+		this.props.modalShow(this.state.randomTweet);
+	}
+
 	componentDidUpdate(prevProps, prevState) {
 		if (prevState.username !== this.state.username) {
-			let config = {
-				params: {
-					screenName: this.props.username,
-					type: this.state.token_type,
-					token: this.state.access_token
-				}
-			};
-			axios
-				// .get('http://localhost:5000/api/tweets/search', config)
-				.get('http://localhost:5000/api/tweets/users', config)
-				.then((response) => {
-					console.log(response.data);
-					const userData = response.data;
-					this.setState({
-						name: userData.name,
-						screenName: userData.screen_name,
-						profileImage: userData.profile_image_url.replace('normal', '400x400')
-					});
-				})
-				.catch((error) => {
-					console.log(error);
-				});
+			this.getUserData();
 		}
 	}
 

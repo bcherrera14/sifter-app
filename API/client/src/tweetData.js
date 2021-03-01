@@ -1,15 +1,17 @@
 const tweetData = [
 	{
-		id: 1,
-		firstName: 'Bryan',
+		id_str: '1',
 		lastName: 'Herrera',
-		username: '@bcherrera',
-		profileImage:
-			'https://avatars.githubusercontent.com/u/11397332?s=460&u=3f3c56d4899795a3665aadfc798f0a5eaba4bfd5&v=4',
-		date: '18 Nov 2018',
-		textContent: 'This is my very first tweet!',
-		likes: 5,
-		retweets: 7
+		created_at: '18 Nov 2018 hi hi',
+		full_text: 'This is my very first tweet!',
+		favorite_count: 5,
+		retweet_count: 7,
+		user: {
+			name: 'Bryan Herrera',
+			screen_name: 'bcherrera',
+			profile_image_url:
+				'https://avatars.githubusercontent.com/u/11397332?s=460&u=3f3c56d4899795a3665aadfc798f0a5eaba4bfd5&v=4'
+		}
 	},
 	{
 		id: 2,

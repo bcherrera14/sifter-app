@@ -53,7 +53,6 @@ class TweetSearch extends React.Component {
 			let config = {
 				params: {
 					searchTerm: this.state.searchTerm,
-					searchUser: this.state.searchUser,
 					result_type: this.state.result_type,
 					type: this.state.token_type,
 					token: this.state.access_token

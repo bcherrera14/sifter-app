@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Spinner } from 'react-bootstrap';
 
 class TweetProfile extends React.Component {
 	constructor(props) {
@@ -11,11 +11,13 @@ class TweetProfile extends React.Component {
 			screenName: '',
 			profileImage: '',
 			token_type: '',
-			access_token: ''
+			access_token: '',
+			tweets: null,
+			loading: false
 		};
 		this.getUserData = this.getUserData.bind(this);
 		this.getAuthToken = this.getAuthToken.bind(this);
-		this.getRandomStatus = this.getRandomStatus.bind(this);
+		this.getTweets = this.getTweets.bind(this);
 		this.handleClick = this.handleClick.bind(this);
 	}
 
@@ -35,8 +37,8 @@ class TweetProfile extends React.Component {
 	}
 
 	componentDidMount() {
+		this.setState({ loading: true });
 		this.getAuthToken();
-		// console.log(this.props);
 	}
 
 	getUserData() {
@@ -48,7 +50,6 @@ class TweetProfile extends React.Component {
 			}
 		};
 		axios
-			// .get('http://localhost:5000/api/tweets/search', config)
 			.get('http://localhost:5000/api/tweets/users', config)
 			.then((response) => {
 				console.log(response.data);
@@ -56,7 +57,8 @@ class TweetProfile extends React.Component {
 				this.setState({
 					name: userData.name,
 					screenName: userData.screen_name,
-					profileImage: userData.profile_image_url.replace('normal', '400x400')
+					profileImage: userData.profile_image_url.replace('normal', '400x400'),
+					loading: false
 				});
 			})
 			.catch((error) => {
@@ -64,7 +66,7 @@ class TweetProfile extends React.Component {
 			});
 	}
 
-	getRandomStatus() {
+	getTweets() {
 		let config = {
 			params: {
 				searchTerm: 'from%3A' + this.props.username,
@@ -76,11 +78,9 @@ class TweetProfile extends React.Component {
 		axios
 			.get('http://localhost:5000/api/tweets/search', config)
 			.then((response) => {
-				const numStatuses = response.data.statuses.length;
-				const index = Math.floor(Math.random() * numStatuses);
-				console.log(response.data.statuses[index]);
+				console.log(response.data.statuses);
 				this.setState({
-					randomTweet: response.data.statuses[index]
+					tweets: response.data.statuses
 				});
 			})
 			.catch((error) => {
@@ -90,20 +90,23 @@ class TweetProfile extends React.Component {
 
 	handleClick() {
 		this.props.modalShow();
-		this.props.getTweet(this.state.randomTweet);
+		this.props.getRandomTweet(this.state.tweets);
 	}
 
 	componentDidUpdate(prevProps, prevState) {
 		if (prevState.username !== this.state.username) {
 			this.getUserData();
-			this.getRandomStatus();
+			this.getTweets();
 		}
 	}
 
 	render() {
+		const spinnerClass = this.state.loading ? 'd-flex align-self-center mb-auto mt-auto' : 'hide';
+		const cardBodyClass = this.state.loading ? 'hide' : 'd-flex flex-column';
 		return (
-			<Card style={{ width: '20rem' }} className="m-5">
-				<Card.Body className="d-flex flex-column">
+			<Card style={{ height: '385px', width: '20rem' }} className="m-5">
+				<Spinner className={spinnerClass} animation="border" variant="primary" />
+				<Card.Body className={cardBodyClass}>
 					<Card.Title className="align-self-center">{this.state.name}</Card.Title>
 					<Card.Subtitle className="align-self-center mb-2 text-muted">
 						@{this.state.screenName}

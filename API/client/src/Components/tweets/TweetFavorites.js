@@ -13,7 +13,7 @@ class TweetFavorites extends React.Component {
 			randomTweet: null
 		};
 		this.setModalShow = this.setModalShow.bind(this);
-		this.getTweet = this.getTweet.bind(this);
+		this.getRandomTweet = this.getRandomTweet.bind(this);
 	}
 
 	setModalShow(bool) {
@@ -22,13 +22,14 @@ class TweetFavorites extends React.Component {
 		});
 	}
 
-	getTweet(tweet) {
-		// setRandomTweet(tweet);
-		console.log(tweet);
+	getRandomTweet(tweets) {
+		const numStatuses = tweets.length;
+		const index = Math.floor(Math.random() * numStatuses);
 		this.setState({
-			randomTweet: tweet
+			randomTweet: tweets[index]
 		});
 	}
+	Random;
 	render() {
 		return (
 			<div>
@@ -45,19 +46,19 @@ class TweetFavorites extends React.Component {
 						<TweetProfile
 							auth={this.props.auth}
 							username="therock"
-							getTweet={this.getTweet}
+							getRandomTweet={this.getRandomTweet}
 							modalShow={() => this.setModalShow(true)}
 						/>
 						<TweetProfile
 							auth={this.props.auth}
 							username="elonmusk"
-							getTweet={this.getTweet}
+							getRandomTweet={this.getRandomTweet}
 							modalShow={() => this.setModalShow(true)}
 						/>
 						<TweetProfile
 							auth={this.props.auth}
 							username="billgates"
-							getTweet={this.getTweet}
+							getRandomTweet={this.getRandomTweet}
 							modalShow={() => this.setModalShow(true)}
 						/>
 					</div>
@@ -65,13 +66,13 @@ class TweetFavorites extends React.Component {
 						<TweetProfile
 							auth={this.props.auth}
 							username="tesla"
-							getTweet={this.getTweet}
+							getRandomTweet={this.getRandomTweet}
 							modalShow={() => this.setModalShow(true)}
 						/>
 						<TweetProfile
 							auth={this.props.auth}
 							username="rivian"
-							getTweet={this.getTweet}
+							getRandomTweet={this.getRandomTweet}
 							modalShow={() => this.setModalShow(true)}
 						/>
 					</div>

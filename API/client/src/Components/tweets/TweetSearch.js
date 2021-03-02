@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Form, Col, Jumbotron, Container, Button } from 'react-bootstrap';
+import { Form, Col, Jumbotron, Container, Button, Spinner } from 'react-bootstrap';
 import TweetFeed from './TweetFeed';
 
 class TweetSearch extends React.Component {
@@ -11,7 +11,8 @@ class TweetSearch extends React.Component {
 			searchTerm: '',
 			result_type: '',
 			token_type: '',
-			access_token: ''
+			access_token: '',
+			loading: false
 		};
 		this.onFormSubmit = this.onFormSubmit.bind(this);
 		this.getAuthToken = this.getAuthToken.bind(this);
@@ -45,6 +46,7 @@ class TweetSearch extends React.Component {
 	}
 
 	componentDidMount() {
+		this.setState({ loading: true });
 		this.getAuthToken();
 	}
 
@@ -62,7 +64,8 @@ class TweetSearch extends React.Component {
 				.get('http://localhost:5000/api/tweets/search', config)
 				.then((response) => {
 					this.setState({
-						statuses: response.data.statuses
+						statuses: response.data.statuses,
+						loading: false
 					});
 				})
 				.catch((error) => {
@@ -89,6 +92,7 @@ class TweetSearch extends React.Component {
 	}
 
 	render() {
+		const spinnerClass = this.state.loading ? 'd-flex align-self-center mt-5' : 'hide';
 		return (
 			<div>
 				<Jumbotron fluid className="d-flex justify-content-center">
@@ -142,7 +146,7 @@ class TweetSearch extends React.Component {
 							</Form.Row>
 						</Form>
 					</div>
-
+					<Spinner className={spinnerClass} animation="border" variant="secondary" />
 					<TweetFeed tweetData={this.state.tweetData} statuses={this.state.statuses} />
 				</div>
 			</div>

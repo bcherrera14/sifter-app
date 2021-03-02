@@ -25,7 +25,8 @@ class TweetSearch extends React.Component {
 				this.setState({
 					token_type: response.data.token_type,
 					access_token: response.data.access_token,
-					searchTerm: 'from%3Amental_floss+OR+from%3Anpr+OR+from%3Averge+OR+from%3Atechreview',
+					searchTerm:
+						'from%3Amental_floss+OR+from%3Anpr+OR+from%3Averge+OR+from%3Atechreview+OR+from%3Atesla',
 					result_type: 'recent'
 				});
 			})
@@ -63,6 +64,8 @@ class TweetSearch extends React.Component {
 			axios
 				.get('http://localhost:5000/api/tweets/search', config)
 				.then((response) => {
+					console.log(response.data.statuses);
+
 					this.setState({
 						statuses: response.data.statuses,
 						loading: false

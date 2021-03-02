@@ -65,7 +65,7 @@ class TweetFavorites extends React.Component {
 					<div className="d-flex justify-content-around">
 						<TweetProfile
 							auth={this.props.auth}
-							username="tesla"
+							username="verge"
 							getRandomTweet={this.getRandomTweet}
 							modalShow={() => this.setModalShow(true)}
 						/>

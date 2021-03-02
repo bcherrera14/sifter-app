@@ -10,5 +10,7 @@ namespace API
         public int favorite_count { get; set; }
         public string id_str { get; set; }
         public UserData User { get; set; }
+
+        public Entities Entities { get; set; }
     }
 }

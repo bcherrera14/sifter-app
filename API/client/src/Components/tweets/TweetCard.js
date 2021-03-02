@@ -4,8 +4,11 @@ import { Form, Col, Card, Button } from 'react-bootstrap';
 const TweetCard = ({ tweet }) => {
 	const dateArray = tweet.created_at.split(' ');
 	const date = dateArray[0] + ' ' + dateArray[1] + ' ' + dateArray[2];
+	const media_url = tweet.entities.media ? tweet.entities.media[0].media_url : '/';
+	const mediaClass = media_url === '/' ? 'hide' : 'media-image align-self-center';
+	console.log(media_url);
 	return (
-		<Card style={{ width: '50rem' }}>
+		<Card style={{ width: '40rem' }}>
 			<Card.Body>
 				<div className="d-flex align-items-center">
 					<div className="mr-2">
@@ -20,11 +23,15 @@ const TweetCard = ({ tweet }) => {
 					</div>
 				</div>
 				<Card.Text className="pt-3">{tweet.full_text}</Card.Text>
-
-				<i className="far fa-heart p-1" />
-				<span>{tweet.favorite_count}</span>
-				<i className="fas fa-retweet p-1" />
-				<span>{tweet.retweet_count}</span>
+				<div className="d-flex flex-column">
+					<img src={media_url} className={mediaClass} alt="media" />
+					<div>
+						<i className="far fa-heart p-1" />
+						<span>{tweet.favorite_count}</span>
+						<i className="fas fa-retweet p-1" />
+						<span>{tweet.retweet_count}</span>
+					</div>
+				</div>
 			</Card.Body>
 		</Card>
 	);

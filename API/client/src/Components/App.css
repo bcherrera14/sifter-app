@@ -136,6 +136,11 @@ button {
 	padding-top: 2rem;
 }
 
+.modal-dialog {
+	display: flex;
+	justify-content: center;
+}
+
 .modal-content {
 	width: auto;
 	border-radius: 1rem;
@@ -164,5 +169,8 @@ button {
 .media-image {
 	width: 35rem;
 	border-radius: 1.5rem;
-	padding-bottom: 16px;
+}
+
+.tweet-stats {
+	margin-top: 16px;
 }

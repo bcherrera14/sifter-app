@@ -6,7 +6,9 @@ const TweetCard = ({ tweet }) => {
 	const date = dateArray[0] + ' ' + dateArray[1] + ' ' + dateArray[2];
 	const media_url = tweet.entities.media ? tweet.entities.media[0].media_url : '/';
 	const mediaClass = media_url === '/' ? 'hide' : 'media-image align-self-center';
-	console.log(media_url);
+	// const link_url = tweet.entities.urls ? tweet.entities.urls[0].url : '/';
+	// const linkClass = link_url === '/' ? 'hide' : 'embed-responsive embed-responsive-21by9';
+	// console.log(tweet.entities.urls[0].url);
 	return (
 		<Card style={{ width: '40rem' }}>
 			<Card.Body>
@@ -25,7 +27,7 @@ const TweetCard = ({ tweet }) => {
 				<Card.Text className="pt-3">{tweet.full_text}</Card.Text>
 				<div className="d-flex flex-column">
 					<img src={media_url} className={mediaClass} alt="media" />
-					<div>
+					<div className="tweet-stats">
 						<i className="far fa-heart p-1" />
 						<span>{tweet.favorite_count}</span>
 						<i className="fas fa-retweet p-1" />

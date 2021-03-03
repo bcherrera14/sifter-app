@@ -81,6 +81,10 @@ class TweetSearch extends React.Component {
 		e.preventDefault();
 		const searchValue = e.target.searchTerm.value;
 		const searchCategory = e.target.inlineFormCustomSelect.value;
+		if (searchValue === '') {
+			alert('Enter search term.');
+			return;
+		}
 		if (searchCategory === 'username') {
 			this.setState({
 				searchTerm: 'from%3A' + searchValue,

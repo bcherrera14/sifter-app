@@ -4,6 +4,7 @@ namespace API
 {
     public class Media {
         public string media_url { get; set; }
+        public string url { get; set; }
     }
 
     public class Urls{

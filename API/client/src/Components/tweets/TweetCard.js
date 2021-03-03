@@ -6,19 +6,19 @@ const TweetCard = ({ tweet }) => {
 	const date = dateArray[0] + ' ' + dateArray[1] + ' ' + dateArray[2];
 	const media_url = tweet.entities.media ? tweet.entities.media[0].media_url : '/';
 	const mediaClass = media_url === '/' ? 'hide' : 'media-image align-self-center';
-	const link_url = tweet.full_text.split(' ').pop();
-	// const tweetText = tweet.full_text.includes('http')
-	// 	? tweet.full_text.replace(link_url, link_url.link(link_url))
-	// 	: tweet.full_text;
-	// if (tweetText) {
-	// 	document.querySelector('#text-content').innerHTML = tweetText;
+	// let tweetText = '';
+	// const hyperlink = tweet.entities.urls ? tweet.entities.urls[0].url : '/';
+	// const atagClass = hyperlink === '/' ? 'hide' : 'atag';
+	// if (tweet.entities.media) {
+	// 	tweetText = tweet.full_text.replace(tweet.entities.urls[0].url, '').replace(tweet.entities.media[0].url, '');
+
+	// 	// console.log(tweet.entities.media[0].url);
+	// } else if (tweet.entities.urls && tweet.entities.urls[0] !== undefined) {
+	// 	tweetText = tweet.full_text.replace(tweet.entities.urls[0].url, '');
+	// 	console.log(tweet.entities.urls[0].url);
+	// } else {
+	// 	tweetText = tweet.full_text;
 	// }
-	const linkIndex = tweet.full_text.search('http');
-	const tweetLink = linkIndex !== -1 ? tweet.full_text.slice(linkIndex) : null;
-	console.log(tweetLink);
-	// const link_url = tweet.entities.urls ? tweet.entities.urls[0].url : '/';
-	// const linkClass = link_url === '/' ? 'hide' : 'embed-responsive embed-responsive-21by9';
-	// console.log(tweet.entities.urls[0].url);
 	return (
 		<Card style={{ width: '40rem' }}>
 			<Card.Body>
@@ -36,6 +36,10 @@ const TweetCard = ({ tweet }) => {
 				</div>
 				<Card.Text id="text-content" className="pt-3">
 					{tweet.full_text}
+					{/* {tweetText}{' '} */}
+					{/* <a className={atagClass} href={hyperlink}>
+						{hyperlink}
+					</a> */}
 				</Card.Text>
 				<div className="d-flex flex-column">
 					<img src={media_url} className={mediaClass} alt="media" />

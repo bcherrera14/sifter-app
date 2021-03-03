@@ -35,8 +35,8 @@ class TweetFavorites extends React.Component {
 			<div>
 				<Jumbotron fluid className="d-flex justify-content-center">
 					<Container className="d-flex flex-column justify-content-center align-items-center">
-						<h1>Trending Profiles</h1>
-						<p>Check out a spontaneous tweet from these trending profiles.</p>
+						<h1>Popular Profiles</h1>
+						<p>Check out a spontaneous tweet from these popular profiles.</p>
 					</Container>
 				</Jumbotron>
 				<div className="profile-grid d-flex flex-column align-items-center">

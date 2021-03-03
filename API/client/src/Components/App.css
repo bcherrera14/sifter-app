@@ -1,6 +1,7 @@
 html,
 body {
 	background: #edf2f7;
+	font-family: 'Roboto';
 }
 
 .App {
@@ -73,6 +74,10 @@ div > .jumbotron {
 	margin-top: 96px;
 	background-color: #183153;
 	color: whitesmoke;
+}
+
+.jumbotron > div > p {
+	font-size: 1.3rem;
 }
 
 div > .search-card {

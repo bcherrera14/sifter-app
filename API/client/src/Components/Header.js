@@ -17,7 +17,7 @@ const Header = () => {
 							Search
 						</Link>
 						<Link className="nav-link" to="/tweet/favorites">
-							Trending
+							Popular
 						</Link>
 					</Nav>
 				</Navbar.Collapse>

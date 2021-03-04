@@ -36,7 +36,7 @@ class TweetFavorites extends React.Component {
 				<Jumbotron fluid className="d-flex justify-content-center">
 					<Container className="d-flex flex-column justify-content-center align-items-center">
 						<h1>Popular Profiles</h1>
-						<p>Check out a spontaneous tweet from these popular profiles.</p>
+						<p>View tweets from these popular profiles.</p>
 					</Container>
 				</Jumbotron>
 				<div className="profile-grid d-flex flex-column align-items-center">
@@ -71,7 +71,7 @@ class TweetFavorites extends React.Component {
 						/>
 						<TweetProfile
 							auth={this.props.auth}
-							username="rivian"
+							username="engadget"
 							getRandomTweet={this.getRandomTweet}
 							modalShow={() => this.setModalShow(true)}
 						/>

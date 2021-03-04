@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Col, Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 const TweetCard = ({ tweet }) => {
 	const dateArray = tweet.created_at.split(' ');

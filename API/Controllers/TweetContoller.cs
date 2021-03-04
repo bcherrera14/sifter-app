@@ -14,7 +14,6 @@ namespace API.Controllers
 {
     
     [ApiController]
-    // [Route("tweets")]
     public class TweetContoller
     {
         
@@ -31,9 +30,7 @@ namespace API.Controllers
             var content = new StringContent(postData, Encoding.UTF8, "application/x-www-form-urlencoded");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = await client.PostAsync(url, content);
-
             string result = await response.Content.ReadAsStringAsync();
-            // Console.WriteLine(result);
             return JsonConvert.DeserializeObject<BearerToken>(result);
         }
 
@@ -42,12 +39,9 @@ namespace API.Controllers
         public async Task<TwitterResponse> Tweet(string type, string token, string searchTerm, string result_type)
         {
             var newToken =  Uri.EscapeDataString(token);
-            // var ACCESS_TOKEN = "AAAAAAAAAAAAAAAAAAAAAGweNAEAAAAADtBzp%2BcRoO54u%2FZZ11bxSnZUfvE%3DrzxvHeZcoMMzPofaXKHQMueIH1S7AbPL3uTptflav1qqMV8V0X";
-            //var TOKEN_TYPE = "Bearer";
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(type, token);
             HttpResponseMessage response = await client.GetAsync($"https://api.twitter.com/1.1/search/tweets.json?q={searchTerm}&result_type={result_type}&lang=en&tweet_mode=extended");
             string tweetString = await response.Content.ReadAsStringAsync();
-            //Console.WriteLine(tweetString);
             return JsonConvert.DeserializeObject<TwitterResponse>(tweetString); 
 
         }
@@ -55,15 +49,9 @@ namespace API.Controllers
         [HttpGet("api/tweets/users")]
         public async Task<UserResponse> Username(string type, string token, string screenName)
         {
-            // var ACCESS_TOKEN = "AAAAAAAAAAAAAAAAAAAAAGweNAEAAAAADtBzp%2BcRoO54u%2FZZ11bxSnZUfvE%3DrzxvHeZcoMMzPofaXKHQMueIH1S7AbPL3uTptflav1qqMV8V0X";
-            // var TOKEN_TYPE = "Bearer";
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(type, token);
             HttpResponseMessage response = await client.GetAsync($"https://api.twitter.com/1.1/users/show.json?screen_name={screenName}");
-            // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(TOKEN_TYPE, ACCESS_TOKEN);
-            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(type, token);
-            // HttpResponseMessage response = await client.GetAsync("https://api.twitter.com/2/users/by?usernames=tesla");
             string usernameString = await response.Content.ReadAsStringAsync();
-            //Console.WriteLine(response.Content);
             return JsonConvert.DeserializeObject<UserResponse>(usernameString); 
 
         }

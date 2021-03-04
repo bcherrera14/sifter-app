@@ -10,10 +10,11 @@ const TweetCard = ({ tweet }) => {
 	// const hyperlink = tweet.entities.urls ? tweet.entities.urls[0].url : '/';
 	// const atagClass = hyperlink === '/' ? 'hide' : 'atag';
 	// if (tweet.entities.media) {
-	// 	tweetText = tweet.full_text.replace(tweet.entities.urls[0].url, '').replace(tweet.entities.media[0].url, '');
+	// 	tweetText = tweet.full_text.replace(tweet.entities.media[0].url, '');
 
-	// 	// console.log(tweet.entities.media[0].url);
-	// } else if (tweet.entities.urls && tweet.entities.urls[0] !== undefined) {
+	// 	console.log(tweet.entities.media[0].url);
+	// }
+	// else if (tweet.entities.urls && tweet.entities.urls[0] !== undefined) {
 	// 	tweetText = tweet.full_text.replace(tweet.entities.urls[0].url, '');
 	// 	console.log(tweet.entities.urls[0].url);
 	// } else {
@@ -36,7 +37,7 @@ const TweetCard = ({ tweet }) => {
 				</div>
 				<Card.Text id="text-content" className="pt-3">
 					{tweet.full_text}
-					{/* {tweetText}{' '} */}
+					{/* {tweetText} */}
 					{/* <a className={atagClass} href={hyperlink}>
 						{hyperlink}
 					</a> */}

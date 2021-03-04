@@ -154,7 +154,7 @@ class TweetSearch extends React.Component {
 						</Form>
 					</div>
 					<Spinner className={spinnerClass} animation="border" variant="secondary" />
-					<TweetFeed tweetData={this.state.tweetData} statuses={this.state.statuses} />
+					<TweetFeed statuses={this.state.statuses} />
 				</div>
 			</div>
 		);

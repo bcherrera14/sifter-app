@@ -1,25 +1,27 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
+import ReactHtmlParser from 'react-html-parser';
 
 const TweetCard = ({ tweet }) => {
 	const dateArray = tweet.created_at.split(' ');
 	const date = dateArray[0] + ' ' + dateArray[1] + ' ' + dateArray[2];
-	const media_url = tweet.entities.media ? tweet.entities.media[0].media_url : '/';
-	const mediaClass = media_url === '/' ? 'hide' : 'media-image align-self-center';
-	// let tweetText = '';
-	// const hyperlink = tweet.entities.urls ? tweet.entities.urls[0].url : '/';
-	// const atagClass = hyperlink === '/' ? 'hide' : 'atag';
-	// if (tweet.entities.media) {
-	// 	tweetText = tweet.full_text.replace(tweet.entities.media[0].url, '');
-
-	// 	console.log(tweet.entities.media[0].url);
-	// }
-	// else if (tweet.entities.urls && tweet.entities.urls[0] !== undefined) {
-	// 	tweetText = tweet.full_text.replace(tweet.entities.urls[0].url, '');
-	// 	console.log(tweet.entities.urls[0].url);
-	// } else {
-	// 	tweetText = tweet.full_text;
-	// }
+	const mediaImageUrl = tweet.entities.media ? tweet.entities.media[0].media_url : '/';
+	const mediaClass = mediaImageUrl === '/' ? 'hide' : 'media-image align-self-center';
+	const tweetUrl = tweet.entities.media ? tweet.entities.media[0].url : '/';
+	const hyperlink = tweet.entities.urls.length > 0 ? tweet.entities.urls[0].url : '/';
+	let hyperlinkHTML = '';
+	if (hyperlink !== '/') {
+		hyperlinkHTML = `<a href=${hyperlink}>${hyperlink}</a>`;
+	}
+	let tweetTextContent = '';
+	if (hyperlink !== '/') {
+		tweetTextContent = tweet.full_text.replace(hyperlink, '');
+	} else {
+		tweetTextContent = tweet.full_text;
+	}
+	if (tweetUrl !== '/') {
+		tweetTextContent = tweetTextContent.replace(tweetUrl, '');
+	}
 	return (
 		<Card style={{ width: '40rem' }}>
 			<Card.Body>
@@ -36,14 +38,11 @@ const TweetCard = ({ tweet }) => {
 					</div>
 				</div>
 				<Card.Text id="text-content" className="pt-3">
-					{tweet.full_text}
-					{/* {tweetText} */}
-					{/* <a className={atagClass} href={hyperlink}>
-						{hyperlink}
-					</a> */}
+					{tweetTextContent}
+					{ReactHtmlParser(hyperlinkHTML)}
 				</Card.Text>
 				<div className="d-flex flex-column">
-					<img src={media_url} className={mediaClass} alt="media" />
+					<img src={mediaImageUrl} className={mediaClass} alt="media" />
 					<div className="tweet-stats">
 						<i className="far fa-heart p-1" />
 						<span>{tweet.favorite_count}</span>

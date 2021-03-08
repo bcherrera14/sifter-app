@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Nav, Form, Button, FormControl, NavDropdown, Image } from 'react-bootstrap';
+import { Navbar, Nav, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import logo from './images/Sifter-Logo.png';
 
@@ -17,7 +17,7 @@ const Header = () => {
 							Search
 						</Link>
 						<Link className="nav-link" to="/tweet/favorites">
-							Trending
+							Popular
 						</Link>
 					</Nav>
 				</Navbar.Collapse>

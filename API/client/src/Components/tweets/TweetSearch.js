@@ -1,43 +1,105 @@
 import React from 'react';
-import { Form, Col, Jumbotron, Container, Button } from 'react-bootstrap';
-
-import TweetCard from './TweetCard';
-import tweetData from '../../tweetData';
+import axios from 'axios';
+import { Form, Col, Jumbotron, Container, Button, Spinner } from 'react-bootstrap';
 import TweetFeed from './TweetFeed';
 
 class TweetSearch extends React.Component {
 	constructor() {
 		super();
-		this.state = { tweetData: [] };
+		this.state = {
+			statuses: [],
+			searchTerm: '',
+			result_type: '',
+			token_type: '',
+			access_token: '',
+			loading: false
+		};
 		this.onFormSubmit = this.onFormSubmit.bind(this);
+		this.getAuthToken = this.getAuthToken.bind(this);
+	}
+
+	getAuthToken() {
+		axios
+			.get('http://localhost:5000/api/tweets/token')
+			.then((response) => {
+				this.setState({
+					token_type: response.data.token_type,
+					access_token: response.data.access_token,
+					searchTerm:
+						'from%3Amental_floss+OR+from%3Anpr+OR+from%3Averge+OR+from%3Atechreview+OR+from%3Atesla',
+					result_type: 'recent'
+				});
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}
+
+	changeSearchIcon(e) {
+		const searchCategory = e.target.value;
+		if (searchCategory === 'keyword') {
+			document.querySelector('#at-icon').style.display = 'none';
+			document.querySelector('#search-icon').style.display = 'block';
+		} else if (searchCategory === 'username') {
+			document.querySelector('#search-icon').style.display = 'none';
+			document.querySelector('#at-icon').style.display = 'block';
+		}
 	}
 
 	componentDidMount() {
-		this.setState({ tweetData });
+		this.setState({ loading: true });
+		this.getAuthToken();
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (prevState.searchTerm !== this.state.searchTerm || prevState.searchUser !== this.state.searchUser) {
+			let config = {
+				params: {
+					searchTerm: this.state.searchTerm,
+					result_type: this.state.result_type,
+					type: this.state.token_type,
+					token: this.state.access_token
+				}
+			};
+			axios
+				.get('http://localhost:5000/api/tweets/search', config)
+				.then((response) => {
+					console.log(response.data.statuses);
+
+					this.setState({
+						statuses: response.data.statuses,
+						loading: false
+					});
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		}
 	}
 
 	onFormSubmit(e) {
 		e.preventDefault();
-		const searchTerm = e.target.searchTerm.value;
+		const searchValue = e.target.searchTerm.value;
 		const searchCategory = e.target.inlineFormCustomSelect.value;
-		let response = [];
+		if (searchValue === '') {
+			alert('Enter search term.');
+			return;
+		}
 		if (searchCategory === 'username') {
-			response = tweetData.filter((tweet) => tweet.firstName.toLowerCase() === searchTerm.toLowerCase());
+			this.setState({
+				searchTerm: 'from%3A' + searchValue,
+				result_type: 'recent'
+			});
 		} else if (searchCategory === 'keyword') {
-			tweetData.forEach((tweet) => {
-				if (tweet.textContent.toLowerCase().includes(searchTerm.toLowerCase())) {
-					response.push(tweet);
-				}
+			this.setState({
+				searchTerm: searchValue,
+				result_type: 'popular'
 			});
 		}
-		this.setState({
-			tweetData: response
-		});
-		console.log(e.target.inlineFormCustomSelect.value);
 	}
 
 	render() {
-		console.log(this.state.tweetData);
+		const spinnerClass = this.state.loading ? 'd-flex align-self-center mt-5' : 'hide';
 		return (
 			<div>
 				<Jumbotron fluid className="d-flex justify-content-center">
@@ -55,9 +117,15 @@ class TweetSearch extends React.Component {
 									<Form.Label className="mr-sm-2" htmlFor="inlineFormCustomSelect" srOnly>
 										Preference
 									</Form.Label>
-									<Form.Control as="select" className="mr-sm-2" id="inlineFormCustomSelect" custom>
-										<option value="username">Username</option>
+									<Form.Control
+										as="select"
+										className="mr-sm-2"
+										id="inlineFormCustomSelect"
+										custom
+										onChange={(e) => this.changeSearchIcon(e)}
+									>
 										<option value="keyword">Keyword</option>
+										<option value="username">Username</option>
 									</Form.Control>
 								</Col>
 								<Col className="my-1">
@@ -71,8 +139,11 @@ class TweetSearch extends React.Component {
 											autoComplete="off"
 											placeholder="Search for tweets"
 										/>
-										<span>
+										<span id="search-icon">
 											<i className="fas fa-search" />
+										</span>
+										<span id="at-icon">
+											<i className="fas fa-at" />
 										</span>
 									</div>
 								</Col>
@@ -82,8 +153,8 @@ class TweetSearch extends React.Component {
 							</Form.Row>
 						</Form>
 					</div>
-
-					<TweetFeed tweetData={this.state.tweetData} />
+					<Spinner className={spinnerClass} animation="border" variant="secondary" />
+					<TweetFeed statuses={this.state.statuses} />
 				</div>
 			</div>
 		);

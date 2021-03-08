@@ -3,33 +3,79 @@ import TweetProfile from './TweetProfile';
 import TweetModal from './TweetModal';
 import { Jumbotron, Container } from 'react-bootstrap';
 
-const TweetFavorites = () => {
-	const [ modalShow, setModalShow ] = useState(false);
+class TweetFavorites extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			modalShow: false,
+			randomTweet: null
+		};
+		this.setModalShow = this.setModalShow.bind(this);
+		this.getRandomTweet = this.getRandomTweet.bind(this);
+	}
 
-	return (
-		<div>
-			<Jumbotron fluid className="d-flex justify-content-center">
-				<Container className="d-flex flex-column justify-content-center align-items-center">
-					<h1>Trending Profiles</h1>
-					<p>Check out a spontaneous tweet from these trending profiles.</p>
-				</Container>
-			</Jumbotron>
-			<div className="profile-grid d-flex flex-column align-items-center">
-				{/* <h1 className="display-3">Trending Profiles</h1> */}
+	setModalShow(bool) {
+		this.setState({
+			modalShow: bool
+		});
+	}
 
-				<div className="d-flex justify-content-around ">
-					<TweetProfile modalShow={() => setModalShow(true)} />
-					<TweetProfile modalShow={() => setModalShow(true)} />
-					<TweetProfile modalShow={() => setModalShow(true)} />
+	getRandomTweet(tweets) {
+		const numStatuses = tweets.length;
+		const index = Math.floor(Math.random() * numStatuses);
+		this.setState({
+			randomTweet: tweets[index]
+		});
+	}
+
+	render() {
+		return (
+			<div>
+				<Jumbotron fluid className="d-flex justify-content-center">
+					<Container className="d-flex flex-column justify-content-center align-items-center">
+						<h1>Popular Profiles</h1>
+						<p>View tweets from these popular profiles.</p>
+					</Container>
+				</Jumbotron>
+				<div className="profile-grid d-flex flex-column align-items-center">
+					<div className="d-flex justify-content-around ">
+						<TweetProfile
+							username="therock"
+							getRandomTweet={this.getRandomTweet}
+							modalShow={() => this.setModalShow(true)}
+						/>
+						<TweetProfile
+							username="elonmusk"
+							getRandomTweet={this.getRandomTweet}
+							modalShow={() => this.setModalShow(true)}
+						/>
+						<TweetProfile
+							username="billgates"
+							getRandomTweet={this.getRandomTweet}
+							modalShow={() => this.setModalShow(true)}
+						/>
+					</div>
+					<div className="d-flex justify-content-around">
+						<TweetProfile
+							username="verge"
+							getRandomTweet={this.getRandomTweet}
+							modalShow={() => this.setModalShow(true)}
+						/>
+						<TweetProfile
+							username="engadget"
+							getRandomTweet={this.getRandomTweet}
+							modalShow={() => this.setModalShow(true)}
+						/>
+					</div>
+					<TweetModal
+						tweet={this.state.randomTweet}
+						show={this.state.modalShow}
+						onHide={() => this.setModalShow(false)}
+					/>
 				</div>
-				<div className="d-flex justify-content-around">
-					<TweetProfile modalShow={() => setModalShow(true)} />
-					<TweetProfile modalShow={() => setModalShow(true)} />
-				</div>
-				<TweetModal show={modalShow} onHide={() => setModalShow(false)} />
 			</div>
-		</div>
-	);
-};
+		);
+	}
+}
 
 export default TweetFavorites;

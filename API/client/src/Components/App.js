@@ -1,6 +1,7 @@
 import React from 'react';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Route } from 'react-router-dom'; 
+import { BrowserRouter, Route } from 'react-router-dom';
 import TweetLanding from './tweets/TweetLanding';
 import TweetFavorites from './tweets/TweetFavorites';
 import TweetSearch from './tweets/TweetSearch';
@@ -21,6 +22,5 @@ const App = () => {
 		</div>
 	);
 };
-
 
 export default App;

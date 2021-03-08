@@ -14,7 +14,7 @@ namespace API.Controllers
 {
     
     [ApiController]
-    public class TweetContoller
+    public class TweetController
     {
         
         static readonly HttpClient client = new HttpClient();

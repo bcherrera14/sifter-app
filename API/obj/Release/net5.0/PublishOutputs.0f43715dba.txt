@@ -11,9 +11,5 @@ C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\
 C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Release\net5.0\PubTmp\Out\API.pdb
 C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Release\net5.0\PubTmp\Out\System.Net.Http.Formatting.dll
 C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Release\net5.0\PubTmp\Out\Microsoft.AspNetCore.SpaServices.Extensions.dll
-C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Release\net5.0\PubTmp\Out\Microsoft.OpenApi.dll
 C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Release\net5.0\PubTmp\Out\Newtonsoft.Json.dll
 C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Release\net5.0\PubTmp\Out\Newtonsoft.Json.Bson.dll
-C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Release\net5.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
-C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Release\net5.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
-C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Release\net5.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll

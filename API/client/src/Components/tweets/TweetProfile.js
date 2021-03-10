@@ -23,7 +23,7 @@ class TweetProfile extends React.Component {
 
 	getAuthToken() {
 		axios
-			.get('http://localhost:5000/api/tweets/token')
+			.get('https://sifterapp.azurewebsites.net/api/tweets/token')
 			.then((response) => {
 				this.setState({
 					token_type: response.data.token_type,
@@ -50,7 +50,7 @@ class TweetProfile extends React.Component {
 			}
 		};
 		axios
-			.get('http://localhost:5000/api/tweets/users', config)
+			.get('https://sifterapp.azurewebsites.net/api/tweets/users', config)
 			.then((response) => {
 				console.log(response.data);
 				const userData = response.data;
@@ -76,7 +76,7 @@ class TweetProfile extends React.Component {
 			}
 		};
 		axios
-			.get('http://localhost:5000/api/tweets/search', config)
+			.get('https://sifterapp.azurewebsites.net/api/tweets/search', config)
 			.then((response) => {
 				console.log(response.data.statuses);
 				this.setState({

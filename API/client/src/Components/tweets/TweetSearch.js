@@ -20,7 +20,7 @@ class TweetSearch extends React.Component {
 
 	getAuthToken() {
 		axios
-			.get('http://localhost:5000/api/tweets/token')
+			.get('https://sifterapp.azurewebsites.net/api/tweets/token')
 			.then((response) => {
 				this.setState({
 					token_type: response.data.token_type,
@@ -62,7 +62,7 @@ class TweetSearch extends React.Component {
 				}
 			};
 			axios
-				.get('http://localhost:5000/api/tweets/search', config)
+				.get('https://sifterapp.azurewebsites.net/api/tweets/search', config)
 				.then((response) => {
 					console.log(response.data.statuses);
 

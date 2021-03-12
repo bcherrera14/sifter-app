@@ -22,8 +22,8 @@ C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\
 C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Release\net5.0\PubTmp\Out\client\build\static\js\2.92d883a4.chunk.js.map
 C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Release\net5.0\PubTmp\Out\client\build\static\js\3.566e9c6b.chunk.js
 C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Release\net5.0\PubTmp\Out\client\build\static\js\3.566e9c6b.chunk.js.map
-C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Release\net5.0\PubTmp\Out\client\build\static\js\main.5609b838.chunk.js
-C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Release\net5.0\PubTmp\Out\client\build\static\js\main.5609b838.chunk.js.map
+C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Release\net5.0\PubTmp\Out\client\build\static\js\main.95358e7f.chunk.js
+C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Release\net5.0\PubTmp\Out\client\build\static\js\main.95358e7f.chunk.js.map
 C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Release\net5.0\PubTmp\Out\client\build\static\js\runtime-main.bdacf30f.js
 C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Release\net5.0\PubTmp\Out\client\build\static\js\runtime-main.bdacf30f.js.map
 C:\Users\Bryan\OneDrive\Mastermind Program\projects\capstone\sifter-app\API\obj\Release\net5.0\PubTmp\Out\client\build\static\media\Sifter-Landing.7fd33562.png

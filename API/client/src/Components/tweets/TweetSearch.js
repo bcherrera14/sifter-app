@@ -64,8 +64,6 @@ class TweetSearch extends React.Component {
 			axios
 				.get('https://sifterapp.azurewebsites.net/api/tweets/search', config)
 				.then((response) => {
-					console.log(response.data.statuses);
-
 					this.setState({
 						statuses: response.data.statuses,
 						loading: false

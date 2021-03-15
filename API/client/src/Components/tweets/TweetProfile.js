@@ -52,7 +52,6 @@ class TweetProfile extends React.Component {
 		axios
 			.get('https://sifterapp.azurewebsites.net/api/tweets/users', config)
 			.then((response) => {
-				console.log(response.data);
 				const userData = response.data;
 				this.setState({
 					name: userData.name,
@@ -78,7 +77,6 @@ class TweetProfile extends React.Component {
 		axios
 			.get('https://sifterapp.azurewebsites.net/api/tweets/search', config)
 			.then((response) => {
-				console.log(response.data.statuses);
 				this.setState({
 					tweets: response.data.statuses
 				});

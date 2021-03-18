@@ -13,4 +13,4 @@ This application uses, react, ASP.NET, twitter API, and authenthication to creat
 
 ## Author
 
-* **Bryan Herrera** - *Full-Stack Developer* - [Website](http://bryan-herrera.com) | [LinkedIn](https://www.linkedin.com/in/herrerabryan/)  
+* **Bryan Herrera** - *Full-Stack Developer* - [Website](http://bryan-herrera.com) | [LinkedIn](https://www.linkedin.com/in/bryan-chris-herrera/)  
